@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Promotional Email</title>
+
+    %%[
+
+    var @ContactId, @Name, @Surname, @Guid, @CouponCode, @GeneratedDate, @ExpirationDate, @DisplayExpirationDate, @CouponDe
+    
+    set @ContactId = AttributeValue('ContactID')
+    set @Name = AttributeValue('Name')
+    set @Surname = AttributeValue('Surname')
+    
+    set @Guid = Replace(GUID(),'-','')
+    set @CouponCode = Substring(@guid,1,16)
+    
+    set @GeneratedDate = Now()
+    set @ExpirationDate = DateAdd(@date, “30”, “D”)
+    
+    set @CouponDe = 'GeneratedCoupons'
+    InsertDE(@CouponDe,'ContactID',@ContactID,'Coupon',@CouponCode,'GeneratedDate',@GeneratedDate,'ExpirationDate',@ExpirationDate)
+    
+    set @DisplayExpirationDate = FormatDate(@ExpirationDate,"l")
+    
+    ]%%
+
+</head>
+<body>
+    <table width="100%" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td align="center">
+                <table width="600" cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;">
+                    <tr>
+                        <td align="center" bgcolor="#ffffff" style="padding: 40px 0;">
+                            <h1 style="color: #333333; font-family: Arial, sans-serif; font-size: 24px; line-height: 28px; margin: 0;">Hello %%Name%%,</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" bgcolor="#ffffff" style="padding: 20px 0;">
+                            <p style="color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px; margin: 0;">We are excited to offer you a special discount on our %%InterestDepartment%% products. Shop now and save big!</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" bgcolor="#ffffff" style="padding: 30px 0;">
+                            <h2 style="color: #333333; font-family: Arial, sans-serif; font-size: 18px; line-height: 22px; margin: 0;">Use the coupon code <span style="color: #ff0000;">%%=v(@CouponCode)=%%</span> before %%=v(@DisplayExpirationDate)=%% to get 20% off your next purchase.</h2>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" bgcolor="#ffffff" style="padding: 20px 0;">
+                            <p style="color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px; margin: 0;">Don't miss out on this amazing offer. Visit our website today and start shopping!</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" bgcolor="#ffffff" style="padding: 40px 0;">
+                            <p style="color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px; margin: 0;">Thank you for choosing our products.</p>
+                            <p style="color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px; margin: 0;">Best regards,</p>
+                            <p style="color: #333333; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px; margin: 0;">Your Company Name</p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
