@@ -1,0 +1,20 @@
+%%[
+
+var @ContactId, @Name, @Surname, @Guid, @CouponCode, @GeneratedDate, @ExpirationDate, @DisplayExpirationDate, @CouponDe
+
+set @ContactId = AttributeValue('ContactID')
+set @Name = AttributeValue('Name')
+set @Surname = AttributeValue('Surname')
+
+set @Guid = Replace(GUID(),'-','')
+set @CouponCode = Substring(@guid,1,16)
+
+set @GeneratedDate = Now()
+set @ExpirationDate = DateAdd(@date, “30”, “D”)
+
+set @CouponDe = 'GeneratedCoupons'
+InsertDE(@CouponDe,'ContactID',@ContactID,'Coupon',@CouponCode,'GeneratedDate',@GeneratedDate,'ExpirationDate',@ExpirationDate)
+
+set @DisplayExpirationDate = FormatDate(@ExpirationDate,"l")
+
+]%%
